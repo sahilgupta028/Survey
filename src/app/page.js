@@ -3,14 +3,8 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "tailwindcss/tailwind.css";
 import axios from "axios";
-
-const initialQuestions = [
-  { id: 1, text: "How satisfied are you with our products?", type: "rating", max: 5 },
-  { id: 2, text: "How fair are the prices compared to similar retailers?", type: "rating", max: 5 },
-  { id: 3, text: "How satisfied are you with the value for money of your purchase?", type: "rating", max: 5 },
-  { id: 4, text: "On a scale of 1-10 how would you recommend us to your friends and family?", type: "rating", max: 10 },
-  { id: 5, text: "What could we do to improve our service?", type: "text" }
-];
+import { initialQuestions } from "@/data/questions";
+import Submitted from "@/components/submitted";
 
 const SurveyApp = () => {
   const [questions, setQuestions] = useState([]);
@@ -73,13 +67,7 @@ const SurveyApp = () => {
 
   if (submitted) {
     return (
-      <motion.h2
-        className="text-center text-xl font-bold text-green-600 mt-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        Thank you for your time! Redirecting...
-      </motion.h2>
+      <Submitted />
     );
   }
 
