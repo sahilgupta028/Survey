@@ -5,6 +5,7 @@ import "tailwindcss/tailwind.css";
 import axios from "axios";
 import { initialQuestions } from "@/data/questions";
 import Submitted from "@/components/submitted";
+import toast, { Toaster } from "react-hot-toast";
 
 const SurveyApp = () => {
   const [questions, setQuestions] = useState([]);
@@ -47,12 +48,15 @@ const SurveyApp = () => {
   };
 
   const submitSurvey = async () => {
+    toast.loading("Loading...");
     try {
       await axios.post("http://localhost:3000/api/submit", {
         sessionId,
         answers,
         status: "COMPLETED"
       });
+      toast.dismiss();
+      toast.success("Survey Submitted");
       setSubmitted(true);
       setTimeout(() => {
         setCurrentQuestionIndex(null);
@@ -61,6 +65,8 @@ const SurveyApp = () => {
         setSessionId(Date.now().toString());
       }, 5000);
     } catch (error) {
+      toast.dismiss();
+      toast.error("Error submitting survey");
       console.error("Error submitting survey", error);
     }
   };
@@ -97,6 +103,7 @@ const SurveyApp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen max-w-screen-2xl w-full bg-gradient-to-r from-purple-400 to-blue-500 p-4">
+    <Toaster />
       <motion.div
         className="bg-white shadow-lg rounded-xl p-6 w-full max-w-md"
         initial={{ opacity: 0, scale: 0.9 }}
