@@ -155,7 +155,7 @@ const SurveyApp = () => {
             </motion.button>
           ) : (
             <motion.button
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
               onClick={nextQuestion}
               whileHover={{ scale: 1.1 }}
             >
