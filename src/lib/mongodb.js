@@ -6,7 +6,7 @@ const connectMongo = async () => {
   if (mongoose.connection.readyState >= 1) return;
 
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect(process.env.NEXT_APP_MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
